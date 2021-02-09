@@ -1,6 +1,7 @@
 const router = require('express').Router();
-{ } = require('../../models');
-const sequelize = require('sequelize');
+
+const userRoutes = require('./user-routes');
+
 
 
 module.exports = router;
