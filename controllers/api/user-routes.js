@@ -10,7 +10,7 @@ router.get('/', (req,res) => {
     .catch(err => {
         console.log(err);
         res.status(500).json(err);
-    });
+    })
 });
 // get by id
 router.get('/', (req,res) => {
@@ -36,7 +36,8 @@ router.get('/', (req,res) => {
     .catch(err => {
         console.log(err);
         res.status(500).json(err);
-    })
+    });
+});
 // post -- create new user
 router.post('/', (req, res) => {
     User.create({
@@ -49,7 +50,7 @@ router.post('/', (req, res) => {
         console.log(err);
         res.status(500).json(err);
     })
-})
+});
 // post -- user login
 router.post('/login', (req, res) => {
     User.findOne({
@@ -59,7 +60,7 @@ router.post('/login', (req, res) => {
     })
     .then(dbUserData => {
         if (!dbUserData) {
-            res.status(400).json({ message: 'User not found' })
+            res.status(400).json({ message: 'User not found' });
             return;
         }
         const validPassword = dbUserData.checkPassword(req.body.password);
@@ -67,12 +68,31 @@ router.post('/login', (req, res) => {
             res.status(400).json({ mesage: 'Incorrect password'});
             return;
         }
-        res.json({ user: dbUserData, message: 'You are now logged in'});
+        res.json({ user: dbUserData, message: 'You are now logged in'})
     })
-})
+});
 // update / put
+router.put('/:id', (req, res) => {
+    //if req.body has exact key/value pairs to match model you can just use req.body
+    User.update(req.body, {
+        individualHooks: true,
+        where: {
+            id: req.params.id
+        }
+    })
+    .then(dbUserData => {
+        if(!dbUserData[0]) {
+            res.status(404).json({ message: 'No user found with this id'});
+            return;
+        }
+        res.json(dbUserData);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
 
 // delete
 
 module.exports = router;
-
