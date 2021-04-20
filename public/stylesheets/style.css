@@ -21,6 +21,10 @@ a:hover {
   color: #3486eb;
 }
 
+ul {
+  list-style-type: none;
+}
+
 button {
   background-color: #225ca3;
   border: 0;
