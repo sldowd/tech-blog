@@ -113,6 +113,7 @@ router.put('/:id', (req, res) => {
 router.post('/logout', (req,res) => {
     if (req.session.loggedIn) {
         req.session.destroy(() => {
+            console.log('+++++++++++++=============================================You have logged out');
             res.status(204).end();
         })
     } else {
