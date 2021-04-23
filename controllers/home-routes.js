@@ -3,8 +3,6 @@ const { Post, Comment, User } = require('../models');
 const sequelize = require('../config/connection');
 
 router.get('/', (req, res) => {
-  console.log("THIS IS A TEST");
-  console.log(req.session);
   Post.findAll({
     attributes: [
       'id',

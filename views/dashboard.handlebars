@@ -1,10 +1,35 @@
+
+{{!-- <button>Create New Post</button> --}}
+
+{{#if posts.length}}
+<section>
+  <h2>Your Posts</h2>
+  <ul>
+    {{#each posts as |post|}}
+    <li>
+      {{> post-info post}}
+      <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit post</a>
+    </li>
+    {{/each}}
+  </ul>
+</section>
+{{/if}}
+
+
 <section>
     <h2>Create New Post</h2>
 
-    <form class='new-post-form'>
+    <form class="new-post-form">
         <div>
-            <label for='post-title'>Title</label>
-            <input type='text' id='post-title'
+            <label for="post-title">Title</label>
+            <input autofocus="true" name="post-title" type="text" id="post-title" />
         </div>
+        <div>
+            <label for="post-content">Content</label>
+            <textarea name="post-content"></textarea>
+        </div>
+        <button type="submit" class="btn">Create</button>
     </form>
 </section>
+
+<script src="/scripts/add-post.js"></script>
